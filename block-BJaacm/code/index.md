@@ -31,7 +31,7 @@ let newUser = user;
 - `brothersCopy === allBrothers;` //`false`,  Although `brothersCopy` is a copy of `user.sibling`, it is not the same array object as `allBrothers`.
 - `brothersCopy == allBrothers;` //`false`, same as above.
 - `brothersCopy == user.sibling;` // `true`, Although `brothersCopy` is a separate array object from `user.sibling`, they have the same elements. However, this is a coincidence, and the comparison is still done by reference. If the arrays had different elements, the comparison would be `false`.
-- `brothersCopy === user.sibling;` // `false`,  `brothersCopy` and `user.sibling` are separate array objects, even though they have the same elements.
+- `brothersCopy === user.sibling;` // `true`,  `brothersCopy` and `user.sibling` are separate array objects, even though they have the same elements.
 - `brothersCopy[0] === user.sibling[0];` // `true`, Both `brothersCopy[0]` and `user.sibling[0]` are strings with the same value (`'Robb'`).
 - `brothersCopy[1] === user.sibling[1];` // `true`,  Both `brothersCopy[1]` and `user.sibling[1]` are strings with the same value (`'Ryan'`). 
 - `user.sibling[1] === newUser.sibling[1];` //`true`, Both `user.sibling[1]` and `newUser.sibling[1]` are strings with the same value (`'Ryan'`).
