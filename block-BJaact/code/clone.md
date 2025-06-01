@@ -10,12 +10,23 @@ let person2 = person;
 
 person.firstName = 'Arya';
 
-console.log(person2.firstName); // output
-console.log(person.firstName); // output
-console.log(person.lastName); // output
-console.log(person == person2); // output
-console.log(person === person2); // output
-console.log(person.lastName === person2.lastName); // output
+console.log(person2.firstName); // Arya
+// Reason: person2 references the same object as person, and them firstName property was changed to 'Arya'.
+
+console.log(person.firstName); // Arya
+// Reason: The firstName of person was explicitly updated.
+
+console.log(person.lastName); // Doe
+// Reason: The lastName property was never modified.
+
+console.log(person == person2); // True
+// Reason: Both person and person2 reference the same object in memory.
+
+console.log(person === person2); // True
+// Reason: === also checks reference equality for objects. Both point to the same object.
+
+console.log(person.lastName === person2.lastName); // True
+// Reason: lastName is a primitive ('Doe'), and both objects share the same value, hence strict equality returns true.
 ```
 
 2. Write the output with reason:
@@ -37,17 +48,28 @@ let personTwo = { ...person };
 person.firstName = 'Arya';
 person.city = 'Navada';
 
-console.log(personTwo.firstName); // output
-console.log(person.firstName); // output
-console.log(personTwo.lastName); // output
-console.log(person.firstName === personTwo.firstName); // output
-console.log(person == personTwo); // output
-console.log(person === personTwo); // output
-console.log(person.address === personTwo.address); // output
-console.log(person.address == personTwo.address); // output
-console.log(personTwo.address.city); // output
-console.log(person.address.city); // output
-console.log(person.address.city == personTwo.address.city); // output
+console.log(personTwo.firstName); // 'John'
+// Because firstName is a primitive and was shallow copied, not affected by person.firstName change.
+console.log(person.firstName); // 'Arya'
+// Because firstName was modified in person).
+console.log(personTwo.lastName); // 'Doe'
+// Because Unchanged, copied by value.
+console.log(person.firstName === personTwo.firstName); // False 
+// Because 'Arya' !== 'John'
+console.log(person == personTwo); // False 
+//  Different objects in memory.
+console.log(person === personTwo); // false 
+//  Different objects in memory.
+console.log(person.address === personTwo.address); // true 
+// Because both refer to the same address object
+console.log(person.address == personTwo.address); // true 
+// Because same reason as above
+console.log(personTwo.address.city); // 'San Jose'
+// Because Even though person.city = 'Navada', that’s a new top-level property and does not affect `address`.
+console.log(person.address.city); // 'San Jose'
+//Because No change was made to the `address.city` field
+console.log(person.address.city == personTwo.address.city); // true 
+// Because Both point to the same string: 'San Jose'
 ```
 
 3. Write the output with reason:
@@ -69,17 +91,28 @@ let personTwo = { ...person, address: { ...person.address } };
 person.firstName = 'Arya';
 person.city = 'Navada';
 
-console.log(personTwo.firstName); // output
-console.log(person.firstName); // output
-console.log(personTwo.lastName); // output
-console.log(person.firstName === personTwo.firstName); // output
-console.log(person == personTwo); // output
-console.log(person === personTwo); // output
-console.log(person.address === personTwo.address); // output
-console.log(person.address == personTwo.address); // output
-console.log(personTwo.address.city); // output
-console.log(person.address.city); // output
-console.log(person.address.city == personTwo.address.city); // output
+console.log(personTwo.firstName); // 'John' 
+// Because personTwo got a copy of 'John', and is unaffected by the change to person.firstName.
+console.log(person.firstName); // 'Arya' 
+// Because Changed after the copy
+console.log(personTwo.lastName); // 'Doe' 
+// Because Copied as primitive, remains unchanged
+console.log(person.firstName === personTwo.firstName); // false
+// Because 'Arya' !== 'John'
+console.log(person == personTwo); // false
+// Because they are different objects
+console.log(person === personTwo); // false 
+// Because they are different objects
+console.log(person.address === personTwo.address); // false 
+// Because they are different objects 'personTwo.address' is a new object
+console.log(person.address == personTwo.address); // false
+// Because Same reason as above 
+console.log(personTwo.address.city); // 'San Jose'
+// Because Neither `address.city` was changed
+console.log(person.address.city); // 'San Jose'
+// Because Neither `address.city` was changed
+console.log(person.address.city == personTwo.address.city); // false
+// since 'Navada' is not equal to 'San Jose'
 ```
 
 4. Clone the `blogs` variable into a new variable named `clonedBlogs`
@@ -104,6 +137,9 @@ let blogs = [
 ];
 
 // Your code goes here
+
+let clonedBlogs = [...blogs];
+
 ```
 
 5. Clone the `question` variable into a new variable named `questionClone`
@@ -129,6 +165,10 @@ var questions = [
 ];
 
 // Your code goes here
+var questionClone = questions.map(question => ({
+  ...question,
+  responses: [...question.responses]
+}));
 ```
 
 6. Clone the `allBlogs` variable into a new variable named `allBlogsClone`
@@ -156,6 +196,8 @@ var allBlogs = {
 };
 
 // Your code goes here
+var allBlogsClone = JSON.parse(JSON.stringify(allBlogs));
+
 ```
 
 7. Clone the `person` variable into a new variable named `clonedPerson`
@@ -189,6 +231,9 @@ let person = [
 ];
 
 // Your code goes here
+
+let clonedPerson = JSON.parse(JSON.stringify(person));
+
 ```
 
 8. Write a function named `cloneObject` that accepts an object and returns the clone of the object
@@ -196,6 +241,7 @@ let person = [
 ```js
 function cloneObject() {
   // your code
+    return JSON.parse(JSON.stringify(obj));
 }
 
 // Run the test below to check your function
